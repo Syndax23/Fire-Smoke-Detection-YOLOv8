@@ -34,7 +34,7 @@ iou_threshold = st.sidebar.slider(
 )
 
 st.sidebar.markdown("---")
-st.sidebar.info("💡 **İpucu:** Yangın tespit edilemiyorsa Güven Eşiğini 0.10'a düşürün.")
+st.sidebar.info("💡 **İpucu:** Yangın tespit edilemiyorsa Güven Eşiğini 0.10'a veya 0.05 düşürün.")
 
 # --- Görüntü Yükleme ---
 uploaded_file = st.file_uploader(
@@ -56,7 +56,6 @@ if uploaded_file is not None:
 
         img_array = np.array(image)
 
-        # conf ve iou parametreleri eklendi — önceki versiyonda yoktu!
         results = model(
             img_array,
             conf=confidence_threshold,
@@ -97,4 +96,4 @@ if uploaded_file is not None:
             )
     else:
         st.success("✅ Sistem Durumu: Temiz. Herhangi bir tehlike algılanmadı.")
-        st.info(f"💡 Güven eşiği: %{confidence_threshold*100:.0f} — Tespit göremiyorsanız eşiği düşürün.")
+        st.info(f"💡 Güven eşiği: %{confidence_threshold*100:.0f} — Tespit göremiyorsanız solda bulunan güven eşiğini düşürünüz.")
